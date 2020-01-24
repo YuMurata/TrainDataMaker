@@ -30,7 +30,9 @@ class Writer:
         self.writer.write(record)
 
 
-def make_tfrecords(save_file_path: str, generate_num: int, param_generator: RandomParamGenerator, data_generator: DataGenerator, evaluator: Evaluator):
+def make_tfrecords(save_file_path: str, generate_num: int,
+                   param_generator: RandomParamGenerator,
+                   data_generator: DataGenerator, evaluator: Evaluator):
     writer = Writer(save_file_path)
     for _ in trange(generate_num, desc='write tfrecords'):
         left_param = param_generator.generate()

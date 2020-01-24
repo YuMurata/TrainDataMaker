@@ -7,6 +7,11 @@ Param = typing.NewType('Param', typing.Any)
 
 
 class DataGenerator(metaclass=ABCMeta):
+    '''
+    implement
+    ---
+    def generate(self, param: typing.Any) -> Array2D:
+    '''
     @abstractmethod
     def generate(self, param: typing.Any) -> Array2D:
         pass

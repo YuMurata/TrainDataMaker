@@ -1,10 +1,10 @@
+import typing
+
+
 class Player:
-    def __init__(self, param, score: int = 1):
+    def __init__(self, param: typing.Any, score: int):
         self.param = param
         self.score = score
-
-    def score_up(self):
-        self.score *= 2
 
     def to_dict(self):
         return {'score': self.score, 'param': self.param}

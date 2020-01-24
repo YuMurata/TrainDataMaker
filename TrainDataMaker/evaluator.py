@@ -19,7 +19,8 @@ class DistanceMeasurer(metaclass=ABCMeta):
 
 
 class Evaluator:
-    def __init__(self, scored_player_list: typing.List[Player], measurer: DistanceMeasurer):
+    def __init__(self, scored_player_list: typing.List[Player],
+                 measurer: DistanceMeasurer):
         self.scored_player_list = scored_player_list
         self.sum_score = sum(
             [player.score for player in self.scored_player_list])
@@ -27,4 +28,6 @@ class Evaluator:
 
     def evaluate(self, param):
         epsilon = 1
-        return sum([player.score/(self.measurer.measure(param, player.param) + epsilon) for player in self.scored_player_list])/self.sum_score
+        return sum([player.score /
+                    (self.measurer.measure(param, player.param) + epsilon)
+                    for player in self.scored_player_list])/self.sum_score
