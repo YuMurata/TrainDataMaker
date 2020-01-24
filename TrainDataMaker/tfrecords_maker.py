@@ -1,8 +1,7 @@
 import numpy as np
 import tensorflow as tf
-from .generate_param import generate_random_param
+from .generator import DataGenerator, RandomParamGenerator
 from tqdm import trange
-from ImageEnhancer import ResizableEnhancer
 from .evaluator import Evaluator
 
 
@@ -31,14 +30,14 @@ class Writer:
         self.writer.write(record)
 
 
-def make_tfrecords(save_file_path: str, generate_num: int, enhancer: ResizableEnhancer, evaluator: Evaluator):
+def make_tfrecords(save_file_path: str, generate_num: int, param_generator: RandomParamGenerator, data_generator: DataGenerator, evaluator: Evaluator):
     writer = Writer(save_file_path)
     for _ in trange(generate_num, desc='write tfrecords'):
-        left_param = generate_random_param()
-        right_param = generate_random_param()
+        left_param = param_generator.generate()
+        right_param = param_generator.generate()
 
-        left_array = np.array(enhancer.resized_enhance(left_param))
-        right_array = np.array(enhancer.resized_enhance(right_param))
+        left_array = data_generator.generate(left_param)
+        right_array = data_generator.generate(right_param)
 
         left_score = evaluator.evaluate(left_param)
         right_score = evaluator.evaluate(right_param)
