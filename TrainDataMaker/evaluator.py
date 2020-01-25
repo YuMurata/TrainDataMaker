@@ -10,6 +10,7 @@ class DistanceMeasurer(metaclass=ABCMeta):
     def measure(self, paramA: typing.Any, paramB: typing.Any) -> float
 
     paramA == paramB -> 0
+
     ret >= 0
     '''
 
